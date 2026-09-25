@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2ec">
+  <title>Ясно — тренажёр речи и мысли</title>
+  <style>
+    :root{--paper:#f5f2ec;--ink:#20231f;--muted:#6c716a;--line:#deded4;--green:#245943;--lime:#d8f176;--white:#fffefa;--orange:#e77b50}
+    *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    button,textarea{font:inherit} button{cursor:pointer} .shell{max-width:1160px;margin:auto;padding:26px 32px 56px}
+    header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:22px}
+    .brand{display:flex;gap:11px;align-items:center;font-weight:750;letter-spacing:-.04em;font-size:22px}.mark{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:var(--green);color:white;font-size:17px}
+    .topnote{font-size:13px;color:var(--muted)} .layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;padding-top:34px}
+    aside{padding-top:4px}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:11px;font-weight:750;color:var(--muted)}
+    .side-title{font-family:Georgia,serif;font-size:26px;line-height:1.16;letter-spacing:-.03em;margin:10px 0 24px}
+    .nav{display:grid;gap:7px}.nav button{border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;color:#626860;display:flex;gap:11px;align-items:center;font-size:14px}.nav button.active{background:#e6e9dc;color:var(--green);font-weight:700}.nav .num{font-variant-numeric:tabular-nums;font-size:11px;opacity:.65;width:19px}
+    .aside-card{margin-top:32px;border:1px solid var(--line);border-radius:14px;padding:16px;background:rgba(255,255,255,.32)}.aside-card strong{font-size:13px}.aside-card p{color:var(--muted);font-size:12px;margin:7px 0 0}
+    main{min-width:0}.welcome{display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 22px}.welcome h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(33px,5vw,50px);letter-spacing:-.045em;line-height:1;margin:8px 0 0}.welcome p{margin:9px 0 0;color:var(--muted);font-size:14px}
+    .streak{border:1px solid var(--line);border-radius:12px;padding:10px 13px;white-space:nowrap;font-size:12px;color:var(--muted)}.streak b{color:var(--ink);font-size:16px;margin-right:4px}
+    .card{background:var(--white);border:1px solid #e8e6dc;border-radius:20px;box-shadow:0 8px 28px rgba(40,48,38,.035);overflow:hidden}.card-top{padding:25px 30px 21px;border-bottom:1px solid #ecebe4;display:flex;justify-content:space-between;gap:20px}.kind{color:var(--green);font-size:12px;font-weight:750;letter-spacing:.09em;text-transform:uppercase}.progress{font-size:12px;color:var(--muted)}
+    .card-body{padding:26px 30px 30px}.prompt{font-family:Georgia,serif;font-size:clamp(21px,2.7vw,29px);line-height:1.34;letter-spacing:-.025em;max-width:740px;margin:0 0 13px}.hint{font-size:14px;color:var(--muted);margin:0 0 22px}.source{border-left:3px solid var(--lime);padding:3px 0 3px 14px;color:#555b53;font-size:15px;margin:0 0 20px;max-width:740px}
+    .textarea-label{font-size:12px;font-weight:700;color:#555b53;display:block;margin-bottom:8px}.answer{width:100%;min-height:145px;resize:vertical;border:1px solid #d9dcd2;border-radius:12px;padding:15px 16px;background:#fff;font-size:15px;line-height:1.6;outline:none}.answer:focus{border-color:#78917f;box-shadow:0 0 0 3px #24594316}.answer::placeholder{color:#a2a69e}
+    .under{display:flex;justify-content:space-between;align-items:center;margin-top:9px;color:#82877f;font-size:12px}.actions{display:flex;gap:10px;margin-top:21px;align-items:center}.primary,.secondary{border:0;border-radius:10px;padding:12px 17px;font-weight:700;font-size:14px}.primary{background:var(--green);color:white}.primary:hover{background:#194734}.secondary{background:transparent;color:#646a62}.secondary:hover{background:#f1f2ec}.feedback{display:none;margin-top:22px;border-radius:12px;background:#f1f4e9;padding:17px 19px}.feedback.show{display:block}.feedback h3{font-size:14px;margin:0 0 8px}.feedback ul{margin:0;padding-left:18px;color:#555d52;font-size:13px}.feedback li+li{margin-top:5px}.nextline{display:flex;justify-content:flex-end;margin-top:13px}.nextline button{border:0;background:transparent;color:var(--green);font-weight:750;font-size:13px;padding:8px}
+    .bottom{display:flex;justify-content:space-between;gap:20px;color:#777d74;font-size:12px;padding:17px 3px}.bottom b{color:#4b554a}.hidden{display:none!important}
+    .levels{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.levels button{border:1px solid var(--line);background:rgba(255,255,255,.38);color:#626860;border-radius:999px;padding:9px 15px;font-size:13px;font-weight:650}.levels button.active{background:var(--green);border-color:var(--green);color:#fff}.level-note{font-size:12px;color:var(--muted);margin:-10px 0 17px 3px}
+    @media(max-width:760px){.shell{padding:18px 17px 35px}.layout{grid-template-columns:1fr;gap:22px;padding-top:24px}aside{padding:0}.side-title{font-size:20px;margin:7px 0 12px}.nav{display:flex;overflow:auto;gap:4px}.nav button{white-space:nowrap;padding:9px 10px}.aside-card{display:none}.welcome{align-items:flex-start}.welcome h1{font-size:39px}.topnote{display:none}.card-top{padding:19px 20px 16px}.card-body{padding:22px 20px 24px}.streak{font-size:11px;padding:8px}.prompt{font-size:23px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header><div class="brand"><span class="mark">Я</span> ясно</div><div class="topnote">Тренажёр ясной речи и мышления</div></header>
+    <div class="layout">
+      <aside>
+        <div class="eyebrow">Практика</div><div class="side-title">Мысль становится яснее, когда её тренируешь.</div>
+        <nav class="nav" id="nav"></nav>
+        <div class="aside-card"><strong>Маленький шаг — уже практика</strong><p>Не ищи идеальный ответ. Сначала сформулируй мысль, потом отредактируй её.</p></div>
+      </aside>
+      <main>
+        <div class="welcome"><div><div class="eyebrow">Твоя сессия</div><h1>Скажи яснее.</h1><p>Одна задача за раз. Пиши своими словами.</p></div><div class="streak"><b id="doneCount">0</b> выполнено сегодня</div></div>
+        <div class="levels" id="levels" aria-label="Уровень сложности"></div><p class="level-note" id="levelNote"></p>
+        <section class="card">
+          <div class="card-top"><div><div class="kind" id="kind"></div></div><div class="progress" id="progress"></div></div>
+          <div class="card-body">
+            <p class="prompt" id="prompt"></p><p class="source hidden" id="source"></p><p class="hint" id="hint"></p>
+            <label class="textarea-label" for="answer">Твой вариант</label><textarea class="answer" id="answer" placeholder="Начни с главной мысли…"></textarea>
+            <div class="under"><span id="tip">Подсказка: одна мысль — одно предложение.</span><span><span id="count">0</span> знаков</span></div>
+            <div class="actions"><button class="primary" id="check">Разобрать ответ</button><button class="secondary" id="clear">Очистить</button></div>
+            <div class="feedback" id="feedback"><h3>Проверь себя</h3><ul id="checks"></ul><div class="nextline"><button id="next">Следующее упражнение →</button></div></div>
+          </div>
+        </section>
+        <div class="bottom"><span><b>Тренируй навык, а не «правильный ответ».</b> Здесь нет оценки.</span><span id="categoryLabel">Формулируем</span></div>
+      </main>
+    </div>
+  </div>
+<script>
+const sets=[
+ {name:'Ясная мысль',short:'Ясность',items:[
+  {kind:'Переформулируй',prompt:'Скажи ту же мысль короче и конкретнее.',source:'«В связи с тем, что у нас в настоящее время наблюдается некоторое отставание по срокам, хотелось бы попросить вас по возможности ускорить выполнение этой задачи».',hint:'Убери лишние вводные слова. Сохрани просьбу и причину.',checks:['Названа ли конкретная просьба?','Можно ли понять, что именно нужно сделать и к какому сроку?','Убраны ли слова, которые не добавляют смысла?']},
+  {kind:'Главное за минуту',prompt:'Объясни, почему полезно планировать день — в двух предложениях.',hint:'Сначала тезис, затем причина или пример.',checks:['Первое предложение выражает главную мысль?','Второе поясняет её, а не повторяет?','Есть ли конкретика вместо общих слов?']},
+  {kind:'Выбери точное слово',prompt:'Замени слово «хороший» более точным в своём предложении.',hint:'Например: удобный, надёжный, убедительный, доброжелательный. Выбери по смыслу.',checks:['Точное ли слово передаёт нужное качество?','Подходит ли оно именно к предмету или ситуации?','Можно ли понять, по какому признаку это качество хорошее?']},
+  {kind:'Собери аргумент',prompt:'Докажи мысль: «Перед отправкой важное письмо полезно перечитать».',hint:'Один тезис и одно конкретное объяснение или пример.',checks:['Есть ли ясный тезис?','Объяснено ли, почему это важно?','Связаны ли аргумент и вывод?']}]},
+ {name:'Точность речи',short:'Точность',items:[
+  {kind:'Убери туман',prompt:'Сделай фразу конкретной: «Надо как-нибудь решить этот вопрос в ближайшее время».',hint:'Добавь действие, ответственного или срок — если можешь.',checks:['Понятно ли, какое действие требуется?','Уточнено ли расплывчатое «скоро»?','Осталась ли фраза естественной?']},
+  {kind:'Найди лишнее',prompt:'Перепиши без повторов: «Я лично сам проверил это своими глазами».',hint:'Сохрани факт, но оставь только слова, которые несут смысл.',checks:['Убраны ли дублирующие слова?','Не потерялся ли смысл исходной фразы?','Звучит ли вариант естественно?']},
+  {kind:'Точнее вместо «это»',prompt:'Напиши два предложения о любом предмете вокруг тебя, не используя слова «это» и «там».',hint:'Называй предмет и его свойства прямо.',checks:['Назван ли предмет?','Есть ли конкретные свойства или действия?','Понятны ли предложения без контекста?']},
+  {kind:'Смягчи категоричность',prompt:'Переформулируй уважительно: «Ты совершенно неправильно понял задачу».',hint:'Сфокусируйся на расхождении в понимании, а не на оценке человека.',checks:['Убрана ли личная оценка?','Понятно ли, в чём именно расхождение?','Есть ли предложение, как уточнить задачу?']}]},
+ {name:'Структура мысли',short:'Структура',items:[
+  {kind:'Тезис и причина',prompt:'Ответь: стоит ли начинать рабочий день с самой важной задачи?',hint:'Сформулируй позицию и подкрепи её одной причиной. Можно не соглашаться.',checks:['Позиция выражена прямо?','Причина поддерживает позицию?','Нет ли лишнего отступления?']},
+  {kind:'Объясни просто',prompt:'Объясни человеку без технического опыта, что такое резервная копия.',hint:'Представь знакомый пример. Избегай специальных терминов.',checks:['Понятно ли без специальных знаний?','Есть ли простой пример или сравнение?','Объяснено ли, зачем это нужно?']},
+  {kind:'Краткий пересказ',prompt:'Перескажи своими словами: «Если задача кажется большой, раздели её на небольшие шаги и начни с самого простого».',hint:'Сохрани главную идею, не копируя фразу.',checks:['Сохранена ли основная мысль?','Формулировка действительно своя?','Ответ короче или яснее исходника?']},
+  {kind:'Вывод из фактов',prompt:'Факты: встреча длится 30 минут; за прошлую встречу успели обсудить только один из четырёх пунктов. Какой практический вывод можно сделать?',hint:'Не придумывай новых фактов. Предложи один разумный следующий шаг.',checks:['Вывод опирается на данные?','Отделены ли факт и предположение?','Предложен ли выполнимый следующий шаг?']}]},
+ {name:'Грамотность',short:'Грамотность',items:[
+  {kind:'Редакторская правка',prompt:'Исправь фразу: «По приезду в офис, мы обсудили дальнейшие планы и приняли решение о переносе встречи».',hint:'Обрати внимание на устойчивое выражение и запятую.',checks:['Исправлено ли управление в выражении о приезде?','Нужна ли запятая после обстоятельства?','Сохранён ли исходный смысл?']},
+  {kind:'Поставь ударение мыслью',prompt:'Составь предложение со словом «звонит» и проверь, где падает ударение.',hint:'Нормативное ударение: звонИт. Встрой слово в естественную фразу.',checks:['Использована ли форма «звонИт»?','Естественно ли звучит всё предложение?','Понятно ли, кто кому звонит?']},
+  {kind:'Расставь знаки',prompt:'Расставь знаки препинания: «Когда закончишь проверь текст и отправь его редактору».',hint:'Подумай, где заканчивается придаточная часть и какие действия перечислены.',checks:['Отделена ли придаточная часть?','Однородные ли это действия?','Верно ли расставлены запятые?']},
+  {kind:'Точное согласование',prompt:'Выбери форму и запиши предложение целиком: «Большинство участников (поддержало / поддержали) предложение».',hint:'Оба варианта могут встречаться в зависимости от смысла. Покажи, на чём делаешь акцент.',checks:['Грамматически ли согласовано сказуемое?','Соответствует ли форма смысловому акценту?','Можно ли объяснить свой выбор?']}]}
+];
+let category=0,index=0,level=0;const levelNames=['Начальный','Уверенный','Продвинутый'];const levelNotes=['Короткие задания: учимся формулировать одну ясную мысль.','Добавляем точность, аргументы и редактирование формулировок.','Работаем с нюансами смысла, логикой и сложными конструкциями.'];const $=s=>document.querySelector(s);const nav=$('#nav');const levels=$('#levels');
+levelNames.forEach((name,i)=>{const b=document.createElement('button');b.textContent=name;b.onclick=()=>{level=i;index=0;render()};levels.append(b)});
+sets.forEach((set,i)=>{set.items.forEach((item,j)=>item.level=j<2?0:j===2?1:2);const b=document.createElement('button');b.innerHTML=`<span class="num">0${i+1}</span>${set.name}`;b.onclick=()=>{category=i;index=0;render()};nav.append(b)});
+const today=new Date().toISOString().slice(0,10);let stored=JSON.parse(localStorage.getItem('yasno-progress')||'{}');if(stored.date!==today)stored={date:today,count:0};
+function render(){const s=sets[category],items=s.items.filter(item=>item.level===level);if(index>=items.length)index=0;const item=items[index];[...nav.children].forEach((b,i)=>b.classList.toggle('active',i===category));[...levels.children].forEach((b,i)=>b.classList.toggle('active',i===level));$('#levelNote').textContent=levelNotes[level];$('#kind').textContent=item.kind;$('#progress').textContent=`Упражнение ${index+1} из ${items.length}`;$('#prompt').textContent=item.prompt;$('#hint').textContent=item.hint;$('#tip').textContent=category===3?'Подсказка: перечитай фразу вслух.':'Подсказка: одна мысль — одно предложение.';$('#categoryLabel').textContent=`${s.name} · ${levelNames[level]}`;const source=$('#source');source.textContent=item.source||'';source.classList.toggle('hidden',!item.source);$('#answer').value='';$('#count').textContent='0';$('#feedback').classList.remove('show');$('#check').textContent='Разобрать ответ';$('#doneCount').textContent=stored.count}
+$('#answer').addEventListener('input',()=>$('#count').textContent=$('#answer').value.length);
+$('#check').onclick=()=>{const value=$('#answer').value.trim();if(value.length<3){$('#answer').focus();$('#tip').textContent='Напиши хотя бы пару слов — тогда будет что проверить.';return}const item=sets[category].items[index];$('#checks').innerHTML='';item.checks.forEach(t=>{const li=document.createElement('li');li.textContent=t;$('#checks').append(li)});$('#feedback').classList.add('show');stored.count++;stored.date=today;localStorage.setItem('yasno-progress',JSON.stringify(stored));$('#doneCount').textContent=stored.count;$('#check').textContent='Ответ разобран'};
+$('#clear').onclick=()=>{$('#answer').value='';$('#count').textContent='0';$('#feedback').classList.remove('show');$('#tip').textContent='Подсказка: одна мысль — одно предложение.';$('#answer').focus()};
+function next(){const items=sets[category].items.filter(item=>item.level===level);index=(index+1)%items.length;render()}$('#next').onclick=next;$('#prompt').addEventListener('dblclick',next);render();
+</script>
+</body>
+</html>
