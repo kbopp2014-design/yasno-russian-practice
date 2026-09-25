@@ -134,6 +134,6 @@ $('#check').onclick=()=>{const value=$('#answer').value.trim();if(value.length<3
 $('#clear').onclick=()=>{$('#answer').value='';$('#count').textContent='0';$('#feedback').classList.remove('show');$('#tip').textContent='Подсказка: одна мысль — одно предложение.';$('#answer').focus()};
 function next(){const items=currentItems();index=(index+1)%items.length;render();document.querySelector('.card').scrollIntoView({behavior:'smooth',block:'start'})}$('#next').onclick=next;render();
 </script>
-<script src="./daily.js?v=levels-feedback-1"></script>
+<script src="./daily.js?v=levels-feedback-2"></script>
 </body>
 </html>
