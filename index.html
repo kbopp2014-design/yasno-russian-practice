@@ -25,6 +25,7 @@
     .bottom{display:flex;justify-content:space-between;gap:20px;color:#777d74;font-size:12px;padding:17px 3px}.bottom b{color:#4b554a}.hidden{display:none!important}
     .levels{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.levels button{border:1px solid var(--line);background:rgba(255,255,255,.38);color:#626860;border-radius:999px;padding:9px 15px;font-size:13px;font-weight:650}.levels button.active{background:var(--green);border-color:var(--green);color:#fff}.level-note{font-size:12px;color:var(--muted);margin:-10px 0 17px 3px}
     .lesson{margin:0 0 23px;padding:15px 17px;border:1px solid #e5e8da;border-radius:13px;background:#f7f8f1}.lesson-tag{font-size:10px;letter-spacing:.12em;color:var(--green);font-weight:800}.lesson h3{font-size:15px;margin:4px 0 5px}.lesson p{font-size:13px;line-height:1.55;color:#535a50;margin:0}.lesson details{margin-top:10px}.lesson summary{font-size:12px;color:var(--green);font-weight:700;cursor:pointer;min-height:30px;display:flex;align-items:center}.lesson-example{padding:8px 0 0;font-family:Georgia,serif!important;font-size:15px!important;color:#31382f!important}.sample{margin:0 0 12px;font-size:13px;color:#555d52}.sample strong{color:#354638}.explanation{margin:0;font-size:13px;color:#555d52;line-height:1.55}
+    .day-plan{border:1px solid var(--line);border-radius:14px;padding:14px;background:rgba(255,255,255,.32);margin-top:22px}.day-plan strong{font-size:13px}.day-plan p{font-size:12px;color:var(--muted);margin:5px 0 0}.nav button.plan-item{cursor:default;font-size:13px;padding:9px 10px}.nav button.plan-item:disabled{opacity:1;color:#596158}.nav button.plan-item.active{background:#e6e9dc;color:var(--green);font-weight:750}.daily-progress{margin:-5px 0 17px}.bar{height:6px;background:#e4e6dc;border-radius:99px;overflow:hidden;margin-top:8px}.bar span{height:100%;display:block;background:var(--green);width:0;transition:width .2s}.daily-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
     @media(max-width:760px){.shell{padding:14px 14px calc(30px + env(safe-area-inset-bottom))}.layout{grid-template-columns:minmax(0,1fr);gap:17px;padding-top:18px}.layout>aside,.layout>main{min-width:0;width:100%}header{padding-bottom:14px}.brand{font-size:20px}.mark{width:36px;height:36px}.topnote{display:none}aside{padding:0}.side-title{font-size:18px;line-height:1.2;margin:6px 0 11px}.nav{display:flex;width:100%;max-width:100%;min-width:0;overflow-x:auto;gap:7px;padding:0 1px 5px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.nav button{white-space:nowrap;flex:0 0 auto;min-height:44px;padding:9px 12px;scroll-snap-align:start}.nav .num{display:none}.aside-card{display:none}.welcome{align-items:flex-start;margin-bottom:16px}.welcome h1{font-size:36px}.welcome p{font-size:13px}.streak{font-size:11px;padding:7px 9px}.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:15px}.levels button{min-height:44px;padding:7px 5px;font-size:12px}.level-note{font-size:12px;line-height:1.4;margin:-8px 2px 13px}.card{min-width:0;max-width:100%;border-radius:17px}.card-top{padding:16px 17px 13px}.card-body{min-width:0;padding:19px 17px 20px}.prompt{font-size:22px;line-height:1.32}.source{font-size:14px;line-height:1.55}.lesson{padding:13px 14px;margin-bottom:19px}.lesson summary{min-height:44px}.answer{min-height:180px;font-size:16px}.under{align-items:flex-start;gap:10px;font-size:11px}.actions{position:sticky;bottom:0;z-index:5;background:linear-gradient(180deg,rgba(255,254,250,.91),var(--white) 20%);padding:12px 0 calc(8px + env(safe-area-inset-bottom));margin-top:12px}.primary,.secondary{min-height:46px}.primary{flex:1}.feedback{padding:15px}.bottom{font-size:11px;padding-bottom:5px}}
   </style>
 </head>
@@ -33,12 +34,13 @@
     <header><div class="brand"><span class="mark">Я</span> ясно</div><div class="topnote">Тренажёр ясной речи и мышления</div></header>
     <div class="layout">
       <aside>
-        <div class="eyebrow">Практика</div><div class="side-title">Мысль становится яснее, когда её тренируешь.</div>
+        <div class="eyebrow">Ежедневная практика</div><div class="side-title">Сначала грамотность. Затем ясность мысли.</div>
         <nav class="nav" id="nav"></nav>
-        <div class="aside-card"><strong>Маленький шаг — уже практика</strong><p>Не ищи идеальный ответ. Сначала сформулируй мысль, потом отредактируй её.</p></div>
+        <div class="day-plan"><strong id="dayLabel">План на сегодня</strong><p>15 заданий в день. Новые примеры по мере прохождения банка.</p></div>
       </aside>
       <main>
-        <div class="welcome"><div><div class="eyebrow">Твоя сессия</div><h1>Скажи яснее.</h1><p>Одна задача за раз. Пиши своими словами.</p></div><div class="streak"><b id="doneCount">0</b> выполнено сегодня</div></div>
+        <div class="welcome"><div><div class="eyebrow">Твоя сессия</div><h1>15 заданий сегодня.</h1><p>Орфография → пунктуация → стилистика → формулировка.</p></div><div class="streak"><b id="doneCount">0</b> / 15 готово</div></div>
+        <div class="daily-progress"><div class="daily-meta"><span id="dayNumber">День 1</span><span id="progressText">Задание 1 из 15</span></div><div class="bar"><span id="progressBar"></span></div></div>
         <div class="levels" id="levels" aria-label="Уровень сложности"></div><p class="level-note" id="levelNote"></p>
         <section class="card">
           <div class="card-top"><div><div class="kind" id="kind"></div></div><div class="progress" id="progress"></div></div>
@@ -116,5 +118,6 @@ $('#check').onclick=()=>{const value=$('#answer').value.trim();if(value.length<3
 $('#clear').onclick=()=>{$('#answer').value='';$('#count').textContent='0';$('#feedback').classList.remove('show');$('#tip').textContent='Подсказка: одна мысль — одно предложение.';$('#answer').focus()};
 function next(){const items=currentItems();index=(index+1)%items.length;render();document.querySelector('.card').scrollIntoView({behavior:'smooth',block:'start'})}$('#next').onclick=next;render();
 </script>
+<script src="./daily.js"></script>
 </body>
 </html>
